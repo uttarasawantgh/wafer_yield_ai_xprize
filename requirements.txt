@@ -1,0 +1,6 @@
+fastmcp
+openai
+python-dotenv
+requests
+pydantic
+google-genai

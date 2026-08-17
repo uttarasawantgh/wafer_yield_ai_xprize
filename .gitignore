@@ -1,0 +1,30 @@
+# Environment variables & secrets
+.env
+
+# Python / Virtual environments
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# OS & IDE metadata
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Runtime 8D reports generated at the root
+8d_report_*.json
+8d_report_*.html
+
+# Build targets and heavy simulation outputs
+build_targets/
+
+# Dynamically generated OpenLane run folders
+openlane/
+openlane/designs/trim_patch_*/
+
+# Binary layout and design stream files
+*.gds

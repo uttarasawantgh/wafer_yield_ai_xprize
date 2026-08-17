@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  waferyield-mcp-node:
+    build: .
+    container_name: waferyield_mcp_worker
+    ports:
+      - "8080:8080"
+    environment:
+      - FASTMCP_HOST=0.0.0.0
+      - FASTMCP_PORT=8080
+    restart: always
