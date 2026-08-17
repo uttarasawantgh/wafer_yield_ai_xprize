@@ -43,7 +43,8 @@ Ensure you have your environment set up with `requirements.txt`. The repository 
 ## 🤝 Acknowledgments & Tools
 
 This system was engineered through a high-performance compute pipeline using:
+* **Gemini:** Utilized as an AI collaborator for architectural troubleshooting, debugging complex structural normalization logic, and optimizing code documentation. 
 * **Gemini 3.5 Flash:** Primary supervisor and architectural collaborator for multi-pass 8D report generation and Verilog patch synthesis.
 * **FastMCP:** Server-client transport layer for managing model orchestration.
-* **OpenLane:** Abstraction for physical design verification and automated patch testing[cite: 1].
-* **Hugging Face Spaces:** Hosting the unified dashboard for 8D report rendering, raw JSON viewer, and execution logs[cite: 1].
+* **OpenLane:** Abstraction for physical design verification and automated patch testing.
+* **Hugging Face Spaces:** Hosting the unified dashboard for 8D report rendering, raw JSON viewer, and execution logs.
