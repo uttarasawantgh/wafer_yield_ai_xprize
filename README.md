@@ -8,7 +8,7 @@ A closed-loop, agentic diagnostic pipeline utilizing vision-language models (VLM
 
 * **🌐 Live Interactive Dashboard:** [Hugging Face Space Live App](https://huggingface.co/spaces/uttarasawant/xprize_wafer_analysis)
 * **💻 GitHub Repository:** [github.com/uttarasawantgh/wafer_yield_ai_xprize](https://github.com/uttarasawantgh/wafer_yield_ai_xprize)
-
+* **🎬 Video Demonstration:** [Watch the Technical Walkthrough](https://youtu.be/80jlObYb1i4)
 ---
 
 ## ⚡ System Architecture & Pipeline
