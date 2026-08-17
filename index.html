@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fab 8D Incident Report Viewer & Closed-Loop Pipeline</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #1e293b;
+      --border: #334155;
+      --text: #f8fafc;
+      --accent: #6366f1;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    nav {
+      background: var(--panel);
+      border-bottom: 1px solid var(--border);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      gap: 0.6rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    nav h1 { font-size: 1.1rem; margin-right: 0.5rem; color: #38bdf8; }
+    .tab-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.82rem;
+      transition: all 0.2s ease;
+    }
+    .tab-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    .content-area { flex: 1; position: relative; overflow: auto; }
+    .view-pane {
+      display: none;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0; left: 0;
+      overflow-y: auto;
+    }
+    .view-pane.active { display: block; }
+    iframe { width: 100%; height: 100%; border: none; }
+    pre {
+      background: var(--panel);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin: 1.5rem;
+      overflow: auto;
+      font-family: "Fira Code", monospace;
+      font-size: 0.9rem;
+      color: #38bdf8;
+      border: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <h1>Fab 8D Portal</h1>
+    <button class="tab-btn active" onclick="switchTab('dashboard-autonomous', event)">Autonomous Loop</button>
+    <button class="tab-btn" onclick="switchTab('architecture', event)">Architecture & Flow</button>
+    <button class="tab-btn" onclick="switchTab('json-viewer', event)">Raw JSON</button>
+  </nav>
+
+  <div class="content-area">
+    <!-- Autonomous Closed-Loop Report Viewer (Default View) -->
+    <div id="dashboard-autonomous" class="view-pane active">
+      <iframe src="8d_report_LOT_WM811K_99_20260816_235357.html"></iframe>
+    </div>
+
+    <!-- System Architecture Tab Content -->
+    <div id="architecture" class="view-pane">
+      <div style="padding: 1.5rem 2rem 3rem 2rem; max-width: 1300px; margin: 0 auto; box-sizing: border-box;">
+        <h2 style="font-size: 1.3rem; color: #38bdf8; margin-bottom: 0.25rem;">System Architecture & Closed-Loop Sequence</h2>
+        <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 1.25rem;">End-to-End Orchestration, Multi-Pass Verification, and Physical Signoff Flow</p>
+        
+        <div style="background: var(--panel); padding: 1.25rem; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);">
+          <img src="Architecture%20Diagram%20and%20Process%20Flow-2026-08-17-051531.png" 
+               alt="Architecture Diagram and Process Flow" 
+               style="width: 100%; height: auto; display: block; border-radius: 4px;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Raw JSON Viewer -->
+    <div id="json-viewer" class="view-pane">
+      <pre id="json-output">Loading JSON data...</pre>
+    </div>
+  </div>
+
+  <script>
+    function switchTab(tabId, evt) {
+      document.querySelectorAll('.view-pane').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('nav .tab-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      if (evt) evt.currentTarget.classList.add('active');
+    }
+    // Fetch the latest autonomous JSON payload on load
+    fetch('8d_report_LOT_WM811K_99_20260816_235357.json')
+      .then(res => res.json())
+      .then(d => {
+        document.getElementById('json-output').textContent = JSON.stringify(d, null, 2);
+      })
+      .catch(err => {
+        document.getElementById('json-output').textContent = 'Error loading JSON payload: ' + err;
+      });
+  </script>
+</body>
+</html>
